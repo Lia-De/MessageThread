@@ -1,0 +1,113 @@
+
+:root {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: black;
+  background-color: var(--dark);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --highlight: #98A62D;
+  --main: #435915;
+  --white: #FCFBFB;
+  --muted: #594D12;
+  --dark: #252607;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+div#root{
+  background-color: var(--white);
+  padding: 1em;
+  border-radius: 0 0 10px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+a {
+  font-weight: 500;
+  text-decoration: inherit;
+}
+a:hover {
+  color: var(--highlight);
+}
+
+h1 {
+  font-size: 3.2em;
+  font-family: Monoton, Arial, Helvetica, sans-serif;
+  line-height: 1.1;
+  color: var(--main);
+}
+h2 {
+  font-size: 2.5em;
+  font-family:  Monoton, Arial, Helvetica, sans-serif;
+  line-height: 1.1;
+  color: var(--main);
+  margin: 0 auto;
+}
+.myTree {
+  min-height: 200px;
+  min-width: 800px;
+  padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-image: url(10603975_42971.svg);
+  background-position: top center;
+  background-repeat:repeat-y;
+  background-size: 800px;
+  
+}
+.message {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px dotted var(--main);
+  color: var(--dark);
+  /* background-color:  var(--white); */
+  padding: 1em 0.3em;
+  -webkit-backdrop-filter: blur(10px) brightness(170%);
+  backdrop-filter: blur(10px) brightness(170%);
+  max-width: 800px;
+}
+.message:last-child{
+  border-radius:0 0 20px 20px;
+}
+.message:first-child{
+  border-radius: 20px 20px 0 0;
+}
+.message > p {
+  margin: 0 auto 0 0.5em;
+}
+
+button {
+  font-family: Monoton, Arial, Helvetica, sans-serif;
+}
+/* button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: var(--highlight);
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+} */
+
