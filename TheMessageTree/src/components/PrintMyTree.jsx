@@ -4,6 +4,7 @@ import { AddNewMessage } from './AddNewMessage'
 import { FaLeaf } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import CreateNewTree from "./CreateNewTree";
+import { timeStampDisplay } from "../vars/vars";
 
       {/* messages displayed
       if no thread - option to name it? */}
@@ -46,12 +47,13 @@ export default function PrintMyTree(){
         <section className="myTree">
             <h2>{tree.name}</h2>
             {tree.messages.map((msg, index) => (
-                <div className="message" key={msg.id || index}>
+                <div className="message" key={msg.messageId}>
                     <FaLeaf size="2em" />
-                    <p>{msg.note}</p>
+                    <p>{timeStampDisplay(msg.datestamp)} #- {msg.note}</p>
                     <FaLeaf size="2em" />
                 </div>
             ))}
+
             <AddNewMessage setTree={setTree}/>
         </section>
     );

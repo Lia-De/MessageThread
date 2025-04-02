@@ -1,0 +1,22 @@
+:root {
+    font-family: Quantico, Helvetica, Arial, sans-serif;
+    --highlight: #98A62D;
+    --main: #435915;
+    --white: #FCFBFB;
+    --muted: #594D12;
+    --dark: #252607;
+  }
+  body {
+    margin: 0;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: Quantico;
+    font-weight: 700;
+  }
+  .myTree {
+display: block;
+  }
+  .message{
+display: flex;
+flex-direction: row;
+  }

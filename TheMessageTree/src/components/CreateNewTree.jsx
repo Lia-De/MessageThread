@@ -2,11 +2,13 @@ import { Button, TextField } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-
+import { fontStyle } from "../vars/vars";
 
 export default function CreateNewTree({setTree, setLoading}){
 const {handleSubmit, register} = useForm();
 const [branchName, setBranchName] = useState(null);
+
+const currentFont = fontStyle[0];
 
 useEffect(()=>{
     setLoading(true);
@@ -30,7 +32,8 @@ const onSubmit = (data) =>{
         <form>
         <TextField style={{
             marginRight: "0.4em",
-            width: "100%"
+            width: "100%",
+            padding: "0"
             }} 
             multiline="true"
             color="success"
@@ -39,7 +42,7 @@ const onSubmit = (data) =>{
 
         <Button variant="outlined"
             style={{
-                fontFamily:"Monoton",
+                fontFamily:currentFont,
                 fontSize: "1em"
             }}
                 color="success" 

@@ -3,12 +3,12 @@ import { useForm } from "react-hook-form"
 import axios from "axios"
 import styles from '../moduleCss/addNew.module.css'
 import { useEffect, useState } from "react"
-
+import { fontStyle } from "../vars/vars"
 
 export const AddNewMessage = ({setTree}) => {
     const {register, handleSubmit, reset} = useForm();
     const [message, setMessage] = useState(null)
-
+    const currentFont = fontStyle[0];
 
     useEffect(()=>{
         if (message!=null)
@@ -36,7 +36,7 @@ export const AddNewMessage = ({setTree}) => {
         <form>
         <TextField style={{
             marginRight: "0.4em",
-            width: "100%"
+            width: "100%",
             }} 
             multiline="true"
             color="success"
@@ -45,7 +45,7 @@ export const AddNewMessage = ({setTree}) => {
 
         <Button variant="outlined"
             style={{
-                fontFamily:"Monoton",
+                fontFamily:currentFont,
                 fontSize: "1em"
             }}
                 color="success" 
