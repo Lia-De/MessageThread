@@ -3,29 +3,21 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { fontStyle } from "../vars/vars";
+import { CreateTree } from "../dbConnections/CreateData";
 
 export default function CreateNewTree({setTree, setLoading}){
 const {handleSubmit, register} = useForm();
-const [branchName, setBranchName] = useState(null);
+
 
 const currentFont = fontStyle[0];
 
-useEffect(()=>{
+const onSubmit = async (data) =>{
     setLoading(true);
-    branchName!=null && axios.post('/api/addTree', branchName)
-    .then(result => {
-        setTree(result.data);
+    const newTree = await CreateTree({
+        branchName: data
     })
-    .catch(e=>{
-        console.log(e)})
-    .finally(()=>{
-        setLoading(false);
-    })
-},[branchName]);
 
-
-const onSubmit = (data) =>{
-    setBranchName(data);
+    setLoading(false);
 }
 
     return (

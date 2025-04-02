@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import PrintMyTree from './components/PrintMyTree'
 
 

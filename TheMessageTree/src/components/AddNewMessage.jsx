@@ -1,42 +1,32 @@
 import { Button, TextField } from "@mui/material"
 import { useForm } from "react-hook-form"
-import axios from "axios"
 import styles from '../moduleCss/addNew.module.css'
-import { useEffect, useState } from "react"
 import { fontStyle } from "../vars/vars"
+import { CreateMessage } from "../dbConnections/CreateData"
 
 export const AddNewMessage = ({setTree}) => {
     const {register, handleSubmit, reset} = useForm();
-    const [message, setMessage] = useState(null)
+    
     const currentFont = fontStyle[0];
 
-    useEffect(()=>{
-        if (message!=null)
-        {
-            axios.post('/api/addNote/1', message)
-            .then(result => {
-                setTree(prev => ({
-                    ...prev, 
-                    messages: ([...prev.messages, result.data])
-                }));
-
-            }).catch(error =>{
-                console.log(error)
-            }).finally(
-                () => reset()
-            )
-        }
-    }, [message])
-
-    const onSubmit = (data) => {
-        setMessage(data)
-    }
+const onSubmit = async (data) => { 
+    const newMsg = await CreateMessage({message: data});
+    reset();
+    // Only proceed if newMsg exists and has data
+    if (newMsg) {
+        setTree(prev => ({
+            ...prev, 
+            messages: ([...prev.messages, newMsg])}))
+      } else {
+        console.log("No data returned from CreateMessage");
+      }
+}
 
     return (
         <form>
         <TextField style={{
-            marginRight: "0.4em",
-            width: "100%",
+                marginRight: "0.4em",
+                width: "100%",
             }} 
             multiline="true"
             color="success"
