@@ -1,13 +1,11 @@
-import axios from "axios";
 import { AddNewMessage } from './AddNewMessage'
 
 import { FaLeaf } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import CreateNewTree from "./CreateNewTree";
 import { timeStampDisplay } from "../vars/vars";
+import { FetchTree } from "../dbConnections/FetchData";
 
-      {/* messages displayed
-      if no thread - option to name it? */}
 
 export default function PrintMyTree(){
     const [tree, setTree] = useState(null);
@@ -15,27 +13,25 @@ export default function PrintMyTree(){
     const [createNew, setCreateNew] = useState();
     const [serverErr, setServerErr] = useState(null);
 
+    // Load the tree on mount - if no tree, set that State, and if server unreachable set that State
     useEffect(()=> {
         setLoading(true);
-        axios('/api/getMyTree/1')
-        .then(result=> {
-                setTree(result.data);
-        })
-        .catch((err)=>{
-            if (err.response.status===404)
-                setCreateNew('Start a new tree')
-            if (err.response.status===500)
-                setServerErr("Server unreachable");
-        })
-        .finally(()=>{
-            setLoading(false);
-        });
-    },[])
-
-    if (loading && serverErr!=null) {
-        return (<h2>loading {serverErr}</h2>)
+        async function fetchData() {
+            const response = await FetchTree({setCreateNew: setCreateNew,setServerErr:setServerErr , setTree:setTree})
+            }
+        fetchData();
+        setLoading(false);
+        },[])
+        // While loading - tell the user
+    if (loading ) {
+        return (<h2>loading</h2>)
     }
-    if (!tree || !tree.messages ) {
+        // If we finished the server call and it was unreachable tell the user
+    if (!loading && serverErr!=null) {
+        return (<h2> {serverErr}</h2>)
+    }
+        // We finished calling the server, but found no tree, print form to make new one
+    if (!tree  ) {
         return (  
         <section className="myTree">
             <h2>{createNew}</h2>
@@ -43,10 +39,11 @@ export default function PrintMyTree(){
         </section>
         );
     }
+        // Print out
     return (
         <section className="myTree">
             <h2>{tree.name}</h2>
-            {tree.messages.map((msg, index) => (
+            {tree.messages && tree.messages.map((msg) => (
                 <div className="message" key={msg.messageId}>
                     <FaLeaf size="2em" />
                     <p>{timeStampDisplay(msg.datestamp)} #- {msg.note}</p>

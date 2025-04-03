@@ -1,13 +1,11 @@
 import { Button, TextField } from "@mui/material"
 import { useForm } from "react-hook-form"
 import styles from '../moduleCss/addNew.module.css'
-import { fontStyle } from "../vars/vars"
 import { CreateMessage } from "../dbConnections/CreateData"
 
 export const AddNewMessage = ({setTree}) => {
     const {register, handleSubmit, reset} = useForm();
     
-    const currentFont = fontStyle[0];
 
 const onSubmit = async (data) => { 
     const newMsg = await CreateMessage({message: data});
@@ -35,7 +33,7 @@ const onSubmit = async (data) => {
 
         <Button variant="outlined"
             style={{
-                fontFamily:currentFont,
+                fontFamily:"Monoton",
                 fontSize: "1em"
             }}
                 color="success" 

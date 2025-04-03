@@ -1,25 +1,23 @@
 import { Button, TextField } from "@mui/material";
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { fontStyle } from "../vars/vars";
 import { CreateTree } from "../dbConnections/CreateData";
 
 export default function CreateNewTree({setTree, setLoading}){
 const {handleSubmit, register} = useForm();
 
+// A struct to set font in my button
 
-const currentFont = fontStyle[0];
 
+    // async function to create tree upon entering a name in the form
 const onSubmit = async (data) =>{
     setLoading(true);
-    const newTree = await CreateTree({
-        branchName: data
-    })
-
+    const newTree = await CreateTree({ branchName: data })
+    if (newTree) {
+        setTree(newTree);
+    }
     setLoading(false);
 }
-
+    // Form to fill in a name for a new tree
     return (
         <form>
         <TextField style={{
@@ -34,7 +32,7 @@ const onSubmit = async (data) =>{
 
         <Button variant="outlined"
             style={{
-                fontFamily:currentFont,
+                fontFamily:"Monoton",
                 fontSize: "1em"
             }}
                 color="success" 
