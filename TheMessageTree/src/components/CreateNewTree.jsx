@@ -1,10 +1,11 @@
 import { Button, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { CreateTree } from "../dbConnections/CreateData";
+import { useStyleContext } from "../context/styleContext";
 
 export default function CreateNewTree({setTree, setLoading}){
 const {handleSubmit, register} = useForm();
-
+const {currentStyle} = useStyleContext();
 // A struct to set font in my button
 
 
@@ -18,6 +19,7 @@ const onSubmit = async (data) =>{
     setLoading(false);
 }
     // Form to fill in a name for a new tree
+    if (currentStyle ===1) {
     return (
         <form>
         <TextField style={{
@@ -41,6 +43,16 @@ const onSubmit = async (data) =>{
         </Button>
         </form>
     )
+}
+if (currentStyle===2) {
+    return (
+        <form>
+            <input className="style2" type="text" {...register("note", {required: true})} />
+            <button type="submit"     onClick={handleSubmit(onSubmit)}>Start</button>
+        </form>
+    )
+
+}
 
 
 }
