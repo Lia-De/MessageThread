@@ -19,15 +19,19 @@
 
 body {
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
 }
-div#root{
+#site-container1{
   background-color: var(--white);
   padding: 1em;
   border-radius: 0 0 10px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#site-container2{
+  background-color: var(--white);
+  height: 100vh;
+  padding: 1em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,18 +47,32 @@ a:hover {
 
 h1 {
   font-size: 3.2em;
-  font-family: Monoton, Arial, Helvetica, sans-serif;
-  line-height: 1.1;
+  
   color: var(--main);
 }
 h2 {
   font-size: 2.5em;
-  font-family:  Monoton, Arial, Helvetica, sans-serif;
-  line-height: 1.1;
+  
   color: var(--main);
   margin: 0 auto;
 }
-.myTree {
+h1.style1 {
+  font-family: Monoton, Arial, Helvetica, sans-serif;
+}
+h2.style1 {
+  font-family:  Monoton, Arial, Helvetica, sans-serif;
+}
+h1.style2, h2.style2 {
+  display: contents;
+  font-size: 1em;
+  color: black;
+  font-family: Quantico, sans-serif;
+  margin: 20px auto 0 0;
+}
+h2.style2{
+  float:left;
+}
+.myTree1 {
   min-height: 200px;
   min-width: 800px;
   padding: 20px 10px;
@@ -67,47 +85,72 @@ h2 {
   background-size: 800px;
   
 }
-.message {
+.message1 {
   display: flex;
   flex-direction: row;
   align-items: center;
   border: 1px dotted var(--main);
   color: var(--dark);
-  /* background-color:  var(--white); */
   padding: 1em 0.3em;
   -webkit-backdrop-filter: blur(10px) brightness(170%);
   backdrop-filter: blur(10px) brightness(170%);
   max-width: 800px;
 }
-.message:last-child{
+.message1:last-child{
   border-radius:0 0 20px 20px;
 }
-.message:first-child{
+.message1:first-child{
   border-radius: 20px 20px 0 0;
 }
-.message > p {
+.message1 > p {
   margin: 0 auto 0 0.5em;
 }
+.message2{
+  margin:0;
+  padding:0;
+  line-height: 0;
+}
 
-button {
-  font-family: Monoton, Arial, Helvetica, sans-serif;
+.myTree2 {
+  min-width: 800px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+    
 }
-/* button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+.message2 {
+  display: flex;
+  flex-direction: row;
+  color: var(--dark); 
+  max-width: 800px;
 }
-button:hover {
-  border-color: var(--highlight);
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-} */
 
+input.style2 {
+  margin-right: 0.4em;
+  width: 100%;
+}
+input.style2author{
+  width: 100px;
+}
+input.style2time{
+  width: 63px;
+}
+div#windowsBox{
+  margin-top: 2em;
+  border-width: 20px 6px 6px 6px;
+  border-style: solid;
+  border-color:  #357EC7;
+  padding: 1px;
+  position: relative;
+}
+div#windowsBox>.del{
+  color: white;
+  background-color: red;
+  width: 2em;
+  height: 18px;
+  text-align: center;
+  justify-content: center;
+  position: absolute;
+  top: -19px;
+  right: 0;
+}

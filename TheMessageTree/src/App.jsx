@@ -5,14 +5,15 @@ import { useEffect, useState } from "react";
 import CreateNewTree from "./components/CreateNewTree";
 import { timeStampDisplay } from "./vars/vars";
 import { FetchTree } from "./dbConnections/FetchData";
+import { useStyleContext } from './context/styleContext';
 
 function App() {
+const { currentStyle } = useStyleContext();
 
-  function PrintMyTree(){ const [tree, setTree] = useState(null);
+function PrintMyTree(){ const [tree, setTree] = useState(null);
       const [loading, setLoading] = useState(false);
       const [createNew, setCreateNew] = useState();
       const [serverErr, setServerErr] = useState(null);
-  
       // Load the tree on mount - if no tree, set that State, and if server unreachable set that State
       useEffect(()=> {
           setLoading(true);
@@ -33,32 +34,40 @@ function App() {
           // We finished calling the server, but found no tree, print form to make new one
       if (!tree  ) {
           return (  
-          <section className="myTree">
-              <h2>{createNew}</h2>
+          <section className={`myTree${currentStyle}`}>
+              <h2 className={`style${currentStyle}`}>{createNew}</h2>
               <CreateNewTree setTree={setTree} setLoading={setLoading} />
           </section>
           );
       }
           // Print out
-      return (
-          <section className="myTree">
-              <h2>{tree.name}</h2>
+      return (<>
+        {currentStyle===2 && <h2 className="style2"> - {tree.name}</h2>}
+          <section className={`myTree${currentStyle}`}>
+                {currentStyle===1 &&<h2 className="style1">{tree.name}</h2>}
               {tree.messages && tree.messages.map((msg) => (
-                  <div className="message" key={msg.messageId}>
-                      <FaLeaf size="2em" />
-                      <p>{msg.note}</p>
-                      {/* <p>[{timeStampDisplay(msg.datestamp)}] &lt;anonym&gt; {msg.note}</p>  */}
-                      <FaLeaf size="2em" />
+                  <div className={`message${currentStyle}`} key={msg.messageId}>
+                      {currentStyle===1 && (
+                        <><FaLeaf size="2em" />
+                          <p>{msg.note}</p>
+                          <FaLeaf size="2em" />
+                        </>
+                        )}
+                      
+                      {currentStyle===2 && <p>[{timeStampDisplay(msg.datestamp)}] &lt;{msg.author || "anon"}&gt; {msg.note}</p> }
+                      
                   </div>
               ))}
   
               <AddNewMessage setTree={setTree}/>
-          </section>
+          </section></>
       );
     }
+
+
   return (
     <>
-      <h1>The Message Tree</h1>
+      <h1 className={`style${currentStyle}`}>The Message Tree</h1>
       <PrintMyTree />
     </>
   )
