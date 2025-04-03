@@ -66,7 +66,11 @@ public class ThreadController : ControllerBase
     public IActionResult AddNote(DTOMessage newNote, int treeId)
     {
         Message message = new Message() { Note = newNote.Note };
-        var allThreads= _context.MessageTrees.ToList();
+        if (newNote.Author != null)
+        {
+            message.Author = newNote.Author;
+        } 
+            var allThreads = _context.MessageTrees.ToList();
         MessageTree treeToAddTo;
         if (allThreads.Count<1)
         {
