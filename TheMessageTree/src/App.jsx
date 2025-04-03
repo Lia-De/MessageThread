@@ -46,8 +46,8 @@ function App() {
               {tree.messages && tree.messages.map((msg) => (
                   <div className="message" key={msg.messageId}>
                       <FaLeaf size="2em" />
-                      {/* <p>{msg.note}</p> */}
-                      <p>{timeStampDisplay(msg.datestamp)} #- {msg.note}</p> 
+                      <p>{msg.note}</p>
+                      {/* <p>{timeStampDisplay(msg.datestamp)} #- {msg.note}</p>  */}
                       <FaLeaf size="2em" />
                   </div>
               ))}
