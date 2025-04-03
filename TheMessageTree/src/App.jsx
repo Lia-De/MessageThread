@@ -47,7 +47,7 @@ function App() {
                   <div className="message" key={msg.messageId}>
                       <FaLeaf size="2em" />
                       <p>{msg.note}</p>
-                      {/* <p>{timeStampDisplay(msg.datestamp)} #- {msg.note}</p>  */}
+                      {/* <p>[{timeStampDisplay(msg.datestamp)}] &lt;anonym&gt; {msg.note}</p>  */}
                       <FaLeaf size="2em" />
                   </div>
               ))}
