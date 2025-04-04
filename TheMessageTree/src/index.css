@@ -5,7 +5,6 @@
   font-weight: 400;
   color: black;
   background-color: var(--dark);
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -21,7 +20,7 @@ body {
   margin: 0;
 }
 
-#site-container1{
+#site-container1 {
   margin: 0 auto;
   background-color: var(--white);
   padding: 1em;
@@ -31,7 +30,7 @@ body {
   align-items: center;
   max-width: 900px;
 }
-#site-container2{
+#site-container2 {
   background-color: var(--white);
   height: 100vh;
   padding: 1em;
@@ -72,7 +71,7 @@ h1.style2, h2.style2 {
   font-family: Quantico, sans-serif;
   margin: 20px auto 0 0;
 }
-h2.style2{
+h2.style2 {
   float:left;
 }
 .myTree1 {
@@ -86,7 +85,13 @@ h2.style2{
   background-position: top center;
   background-repeat:repeat-y;
   background-size: 800px;
-  
+}
+.myTree2 {
+  min-width: 800px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+    
 }
 .message1 {
   display: flex;
@@ -99,29 +104,19 @@ h2.style2{
   backdrop-filter: blur(10px) brightness(170%);
   max-width: 800px;
 }
-.message1:last-child{
+.message1:last-child {
   border-radius:0 0 20px 20px;
 }
-.message1:first-child{
+.message1:first-child {
   border-radius: 20px 20px 0 0;
 }
 .message1 > p {
   margin: 0 auto 0 0.5em;
 }
-.message2{
+.message2 {
   margin:0;
   padding:0;
   line-height: 0;
-}
-
-.myTree2 {
-  min-width: 800px;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-    
-}
-.message2 {
   display: flex;
   flex-direction: row;
   color: var(--dark); 
@@ -132,13 +127,13 @@ input.style2 {
   margin-right: 0.4em;
   width: 100%;
 }
-input.style2author{
+input.style2author {
   width: 100px;
 }
-input.style2time{
+input.style2time {
   width: 63px;
 }
-div#windowsBox{
+div#windowsBox {
   margin-top: 2em;
   border-width: 20px 6px 6px 6px;
   border-style: solid;
@@ -146,7 +141,7 @@ div#windowsBox{
   padding: 1px;
   position: relative;
 }
-div#windowsBox>.del{
+div#windowsBox>.del {
   color: white;
   background-color: red;
   width: 2em;
