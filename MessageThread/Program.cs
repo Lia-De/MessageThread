@@ -1,6 +1,7 @@
 using MessageThread.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop.Infrastructure;
+using MessageThread.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,9 @@ if (string.IsNullOrEmpty(connectionString))
 {
     throw new Exception("Check .env");
 }
+
+// Adding Signal R 
+builder.Services.AddSignalR();
 
 // Add services to the container.
 builder.Services.AddDbContext<MessageContext>(options =>
@@ -28,6 +32,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Addding SignalR
+app.MapHub<NotifyHub>("/notifyHub");
 
 app.UseHttpsRedirection();
 
