@@ -25,11 +25,11 @@ function PrintMyTree(){ const [tree, setTree] = useState(null);
           },[])
           // While loading - tell the user
       if (loading ) {
-          return (<h2>loading</h2>)
+          return (<h2 className={`style${currentStyle}`}>loading</h2>)
       }
           // If we finished the server call and it was unreachable tell the user
       if (!loading && serverErr!=null) {
-          return (<h2> {serverErr}</h2>)
+          return (<h2 className={`style${currentStyle}`}> ! {serverErr}</h2>)
       }
           // We finished calling the server, but found no tree, print form to make new one
       if (!tree  ) {
