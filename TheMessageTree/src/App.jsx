@@ -58,7 +58,7 @@ function PrintMyTree(){ const [tree, setTree] = useState(null);
                       
                   </div>
               ))}
-  
+              {/* Print form to add chats */}
               <AddNewMessage setTree={setTree}/>
           </section></>
       );

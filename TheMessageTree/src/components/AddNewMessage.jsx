@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import * as SignalR from "@microsoft/signalr";
 import { Button, TextField } from "@mui/material"
 import { useForm } from "react-hook-form"
 import styles from '../moduleCss/addNew.module.css'
@@ -8,19 +9,41 @@ import { fontStyle, timeStampDisplay } from "../vars/vars"
 
 export const AddNewMessage = ({setTree}) => {
     const {register, handleSubmit, reset} = useForm();
+    const conn = useRef(null);
+    
     const {currentStyle} = useStyleContext();
     const buttonFont = fontStyle[currentStyle-1];
-const onSubmit = async (data) => { 
+    
+    useEffect(()=> {
+        const connection = new SignalR.HubConnectionBuilder()
+        .withUrl("https://localhost:7133/notifyHub")
+        .build();
+        // Set the reference to connection to use elsewhere
+        conn.current = connection;
+
+        connection.on("ReceiveMessage", (data) => {
+            setTree(prev => ({
+                ...prev, 
+                messages: ([...prev.messages, data])}))
+        });
+        connection.start();
+        return () => {
+            connection.stop();
+        }
+
+    },[])
+
+
+    const onSubmit = async (data) => { 
+
     const newMsg = await CreateMessage({message: data});
+    try {await conn.current?.invoke("SendMessage", newMsg);}
+        catch (err) {
+            console.log(err);
+        }
     reset();
     // Only proceed if newMsg exists and has data
-    if (newMsg) {
-        setTree(prev => ({
-            ...prev, 
-            messages: ([...prev.messages, newMsg])}))
-      } else {
-        console.log("No data returned from CreateMessage");
-      }
+   
 }
 
     if (currentStyle ===1){
